@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- context.xml -->
 
-<Context docBase="board_01" path="/board_01" reloadable="true">
+<Context docBase="board_mvc_01" path="/board_mvc_01" reloadable="true">
 <!-- MySQL -->
 <Resource  
 name="jdbc/mysql"
