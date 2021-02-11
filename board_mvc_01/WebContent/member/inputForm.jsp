@@ -24,7 +24,7 @@
 	<form name="inputform" method="post" action="${ctxpath}/member/inputPro.do" onsubmit="return inputCheck()">
 		<table>
 			<tr>
-				<td>사용자ID</td>
+				<td nowrap width="10">사용자ID</td>
 				<td>
 					<input type="text" name="id" id="id" size="30" onkeyup="document.inputform.idCheck.value='-1">
 					<input type="button" value="ID중복체크" onclick="confirmIdCheck()">

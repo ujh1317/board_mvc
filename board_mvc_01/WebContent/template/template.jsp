@@ -5,11 +5,11 @@
 <body>
 	<table border="1">
 		<tr height="20">
-			<td><a href="${ctxpath}/member.main.do">홈</a></td>
+			<td><a href="${ctxpath}/member/main.do">홈</a></td>
 			<td colspan="2" align="right"><jsp:include page="/module/top.jsp" flush="false"/></td>
 		</tr>
 		<tr>
-			<td width="10%" valign="top"><jsp:include page="/module/left.jsp" flush="false"/></td>
+			<td width="15%" valign="top"><jsp:include page="/module/left.jsp" flush="false"/></td>
 			<td width="80%" valign="middle"><jsp:include page="${CONTENT}" flush="false"/></td>
 		</tr>
 		<tr height="10">
