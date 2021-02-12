@@ -15,6 +15,7 @@ public class InputProAction implements CommandAction{
 		request.setCharacterEncoding("utf-8");
 		MemberDTO memberDTO = new MemberDTO();
 		String id = request.getParameter("id");
+		
 		memberDTO.setId(id);
 		memberDTO.setPw(request.getParameter("pw"));
 		memberDTO.setName(request.getParameter("name"));

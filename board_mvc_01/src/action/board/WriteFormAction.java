@@ -4,6 +4,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import command.*;
+import member.*;
+import mysql.board.*;
 
 public class WriteFormAction implements CommandAction {
 
