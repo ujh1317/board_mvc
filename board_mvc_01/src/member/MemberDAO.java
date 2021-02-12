@@ -11,15 +11,15 @@ public class MemberDAO {
 		return memInstance;
 	}//getInstance()
 	
-	//커넥션풀
+	//커넥션풀---------------------------------------------------------
 	public Connection getConn() throws Exception{
 		Context ct = new InitialContext();
 		DataSource ds = (DataSource)ct.lookup("java:comp/env/jdbc/mysql");
 		return ds.getConnection();
 	}//getConn()
 	
-	//id중복체크
-	public int confirmId(String id){
+	//id중복체크---------------------------------------------------------
+	public int confirmId(String id) throws Exception{
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -46,8 +46,8 @@ public class MemberDAO {
 		return x;
 	}//confirmId()
 	
-	//회원가입
-	public void getMember(MemberDTO memberDTO){
+	//회원가입---------------------------------------------------------
+	public void insertMember(MemberDTO memberDTO) throws Exception{
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		try{
@@ -75,8 +75,8 @@ public class MemberDAO {
 		}//finally
 	}//getMember()
 	
-	//로그인(인증)
-	public int userCheck(String id, String pw){
+	//로그인(인증)---------------------------------------------------------
+	public int userCheck(String id, String pw) throws Exception{
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -108,4 +108,104 @@ public class MemberDAO {
 		return x;
 	}//userCheck()
 	
+	//회원정보수정---------------------------------------------------------
+	public MemberDTO getMember(String id) throws Exception{
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		MemberDTO memberDTO = null;
+		
+		try{
+			conn = getConn();
+			pstmt = conn.prepareStatement("select * from member where id=?");
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()){
+				memberDTO = new MemberDTO();
+				memberDTO.setId(rs.getString("id"));
+				memberDTO.setPw(rs.getString("pw"));
+				memberDTO.setName(rs.getString("name"));
+				memberDTO.setNick(rs.getString("nick"));
+				memberDTO.setJumin1(rs.getString("jumin1"));
+				memberDTO.setJumin2(rs.getString("Jumin2"));
+				memberDTO.setEmail(rs.getString("email"));
+				memberDTO.setZipcode(rs.getString("zipcode"));
+				memberDTO.setAddr(rs.getString("addr"));
+				memberDTO.setRegdate(rs.getTimestamp("regdate"));
+			}//if
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			try{
+				if(rs!=null){rs.close();}
+				if(pstmt!=null){pstmt.close();}
+				if(conn!=null){conn.close();}
+			}catch(Exception e){}
+		}//finally
+		return memberDTO;
+	}//getMember()
+	
+	//DB수정---------------------------------------------------------
+	public void updateMember(MemberDTO memberDTO) throws Exception{
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		try{
+			conn = getConn();
+			String sql = "update member set pw=?,nick=?,email=?,zipcode=?,addr=? where id=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, memberDTO.getPw());
+			pstmt.setString(2, memberDTO.getNick());
+			pstmt.setString(3, memberDTO.getEmail());
+			pstmt.setString(4, memberDTO.getZipcode());
+			pstmt.setString(5, memberDTO.getAddr());
+			pstmt.setString(6, memberDTO.getId());
+			pstmt.executeUpdate();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			try{
+				if(pstmt!=null){pstmt.close();}
+				if(conn!=null){conn.close();}
+			}catch(Exception e){}
+		}//finally
+	}//updateMember()
+	
+	//회원탈퇴---------------------------------------------------------
+	public int deleteMember(String id, String pw) throws Exception{
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		PreparedStatement pstmt2 = null;
+		ResultSet rs = null;
+		int x = -1;
+		
+		try{
+			conn = getConn();
+			pstmt = conn.prepareStatement("select * from member where id=?");
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			if(rs.next()){
+				String dbPw = rs.getString("pw");
+				if(pw.equals(dbPw)){
+					pstmt2 = conn.prepareStatement("delete from member where id=?");
+					pstmt2.setString(1, id);
+					pstmt2.executeUpdate();
+					x = 1; //탈퇴 성공
+				}else{
+					x = -1; //탈퇴 실패
+				}//else
+			}//if
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			try{
+				if(rs!=null){rs.close();}
+				if(pstmt!=null){pstmt.close();}
+				if(pstmt2!=null){pstmt2.close();}
+				if(conn!=null){conn.close();}
+			}catch(Exception e){}
+		}//finally
+		return x;
+	}//deleteMember()
 }//class

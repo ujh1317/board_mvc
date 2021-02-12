@@ -8,6 +8,6 @@
 </c:if>
 
 <c:if test="${!empty sessionScope.memId}">
-	<input type="button" value="로그아웃" onclick="location.href='${ctxpath}/member/logout.do'">
-	<input type="button" value="회원정보변경" onclick="location.href='${ctxpath}/member/modify.do'">
+		<input type="button" value="로그아웃" onclick="location.href='${ctxpath}/member/logout.do'">
+		<input type="button" value="회원정보변경" onclick="location='${ctxpath}/member/modify.do'">
 </c:if>

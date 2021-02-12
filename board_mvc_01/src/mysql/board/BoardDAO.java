@@ -28,7 +28,7 @@ public class BoardDAO {
 		return ds.getConnection();
 	}//getConn()
 	
-	//글쓰기 , 답글쓰기
+	//글쓰기 , 답글쓰기---------------------------------------------------------
 	public void getInsert(BoardDTO boardDTO) throws Exception{
 		int num = boardDTO.getNum();
 		int ref = boardDTO.getRef();
@@ -84,7 +84,7 @@ public class BoardDAO {
 		}//finally
 	}//getInsert()
 	
-	//글갯수
+	//글갯수---------------------------------------------------------
 	public int getCount() throws Exception{
 		int x = 0;
 		try{
@@ -106,7 +106,7 @@ public class BoardDAO {
 		return x;
 	}//getCount()
 	
-	//리스트
+	//리스트---------------------------------------------------------
 	public List getList(int start, int cnt) throws Exception{
 		List<BoardDTO> list = null;
 		try{
@@ -148,7 +148,7 @@ public class BoardDAO {
 		return list;
 	}//getList()
 	
-	//글내용보기
+	//글내용보기---------------------------------------------------------
 	public BoardDTO getContent(int num) throws Exception{
 		BoardDTO boardDTO = null;
 		try{
@@ -188,7 +188,7 @@ public class BoardDAO {
 		return boardDTO;
 	}//getContent()
 	
-	//글수정
+	//글수정---------------------------------------------------------
 	public BoardDTO getUpdate(int num) throws Exception{
 		BoardDTO boardDTO = null;
 		try{
@@ -224,7 +224,7 @@ public class BoardDAO {
 		return boardDTO;
 	}//getUpdate()
 	
-	//DB수정
+	//DB수정---------------------------------------------------------
 	public int getUpdateDb(BoardDTO boardDTO) throws Exception{
 		int x = -10;
 		try{
@@ -255,7 +255,7 @@ public class BoardDAO {
 		return x;
 	}//getUpdateDb()
 	
-	//글삭제
+	//글삭제---------------------------------------------------------
 	public int getDelete(int num) throws Exception{
 		int x = -10;
 		try{

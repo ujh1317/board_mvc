@@ -1,5 +1,5 @@
 package member;
-import java.sql.*;
+import java.sql.Timestamp;;
 
 public class MemberDTO {
 	private String id;

@@ -17,7 +17,7 @@
 		</tr>
 		<tr>
 			<td align="right">
-				<a href="${ctxpath}/board/list.do">목록</a>
+				<a href="#" onclick="history.back()">이전</a>
 			</td>
 		</tr>
 	</table>
@@ -68,7 +68,7 @@
 			<tr>
 				<td>주소</td>
 				<td>
-					<input type="text" name="addr" id="addr" size="70"><br>
+					<input type="text" name="addr" id="addr" size="70" readonly><br>
 					상세주소 : <input type="text" name="addr2" id="addr2" size="60">
 				</td>
 			</tr>

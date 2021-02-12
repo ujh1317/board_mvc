@@ -4,12 +4,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import command.*;
 
-public class MainAction implements CommandAction {
+public class ModifyAction implements CommandAction{
 
 	@Override
 	public String requestPro(HttpServletRequest request,
 			HttpServletResponse response) throws Throwable {
 
-		return "/member/main.jsp";
+		return "/member/modify.jsp";
 	}//requestPro()
 }//class

@@ -115,4 +115,47 @@ function openDaumPostcode(){
 	   }).open();
 	}//openDaumPostcode()
 
+function modifyCheck(){
+	
+	if($('#pw').val()==""){
+		alert("암호를 입력하십시오.");
+		$('#pw').focus();
+		return false;
+	}//#pw
+	if($('#pw2').val()==""){
+		alert("암호 확인을 입력하십시오.");
+		$('#pw2').focus();
+		return false;
+	}//#pw2
+	
+	if($('#pw').val()!=$('#pw2').val()){
+		alert("암호가 일치하지 않습니다.");
+		$('#pw2').val('');
+		$('#pw2').focus();
+		return false;
+	}//#pw=#pw2
+	
+	if($('#nick').val()==''){
+		alert("닉네임을 입력하십시요.");
+		$('#nick').focus();
+		return false;
+	}//#nick
+	if($('#email').val()==""){
+		alert("이메일을 입력하십시오.");
+		$('#email').focus();
+		return false;
+	}//#email
+	if($('#zipcode').val()==""){
+		alert("우편번호를 입력하십시오.");
+		$('#zipcode').focus();
+		return false;
+	}//#zipcode
+	if($('#addr').val()==""){
+		alert("주소를 입력하십시오.");
+		$('#addr').focus();
+		return false;
+	}//#addr
+	
+	return true;
+ }//modifyCheck()
 
