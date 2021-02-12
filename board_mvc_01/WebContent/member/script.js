@@ -159,3 +159,18 @@ function modifyCheck(){
 	return true;
  }//modifyCheck()
 
+function begin(){
+	document.deleteform.pw.focus();
+}//begin
+
+function deleteCheck(){
+	if(!$('#pw').val()){
+		alert("암호를 입력하십시오.");
+		$('#pw').focus();
+		return false;
+	}//if
+	return true;
+}//deleteCheck()
+
+
+

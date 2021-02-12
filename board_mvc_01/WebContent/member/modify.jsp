@@ -16,7 +16,7 @@
 				</form>
 			</td>
 			<td>
-				<form name="deleteform" method="post" action="${ctxpath}/member/delete.do">
+				<form name="deleteform" method="post" action="${ctxpath}/member/deleteForm.do">
 					<input type="hidden" name="id" value="${sessionScope.memId}">
 					<input type="submit" value="회원탈퇴">
 				</form>
