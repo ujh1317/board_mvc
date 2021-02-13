@@ -20,11 +20,8 @@
 			</td>
 		</tr>
 	</table>
-	<form name="writeform" method="post" action="${ctxpath}/board/writePro.do" onsubmit="">
+	<form name="writeform" method="post" action="${ctxpath}/board/updatePro.do?pageNum=${pageNum}" onsubmit="return writeCheck()">
 		<input type="hidden" name="num" value="${num}">
-		<input type="hidden" name="ref" value="${ref}">
-		<input type="hidden" name="re_step" value="${re_step}">
-		<input type="hidden" name="re_level" value="${re_level}">
 		<table border="1">
 		<%-- 
 			<tr>
@@ -34,11 +31,11 @@
 			--%>
 			<tr>
 				<td>글제목</td>
-				<td><input type="text" name="title" id="title" size="60"></td>
+				<td><input type="text" name="title" id="title" size="60" value="${boardDTO.title}"></td>
 			</tr>
 			<tr>
 				<td>글내용</td>
-				<td><textarea name="content" id="content" rows="20" cols="90"></textarea></td>
+				<td><textarea name="content" id="content" rows="20" cols="90">${boardDTO.content}</textarea></td>
 			</tr>
 			<tr>
 				<td colspan="2">
@@ -48,14 +45,7 @@
 			</tr>
 			<tr>
 				<td colspan="2" align="center">
-				<%-- 원글 --%>
-				<c:if test="${num==0}">
-					<input type="submit" value="글쓰기">
-				</c:if>
-				<%-- 답글 --%>
-				<c:if test="${num!=0}">
-					<input type="submit" value="답글쓰기">
-				</c:if>
+					<input type="submit" value="수정">
 					<input type="reset" value="취소">
 				</td>
 			</tr>

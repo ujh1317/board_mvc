@@ -233,11 +233,12 @@ public class BoardDAO {
 			pstmt.setInt(1, boardDTO.getNum());
 			rs = pstmt.executeQuery();
 			if(rs.next()){
-				sql = "update board set title=?, content=?, modifydate=now() where num=?";
+				sql = "update board set title=?, content=?, rank=?, modifydate=now() where num=?";
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, boardDTO.getTitle());
 				pstmt.setString(2, boardDTO.getContent());
-				pstmt.setInt(3, boardDTO.getNum());
+				pstmt.setInt(3, boardDTO.getRank());
+				pstmt.setInt(4, boardDTO.getNum());
 				pstmt.executeUpdate();
 				x = 1;
 			}else{

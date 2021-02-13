@@ -1,31 +1,22 @@
-function writeSave(){
-	//alert("aaa")
-	if(document.writeform.writer.value==""){
-	  alert("작성자를 입력하십시요.");
-	  document.writeform.writer.focus();
-	  return false;
-	}
-	if(document.writeform.subject.value==""){
-	  alert("제목을 입력하십시요.");
-	  document.writeform.subject.focus();
-	  return false;
-	}
-	
-	if(document.writeform.content.value==""){
-	  alert("내용을 입력하십시요.");
-	  document.writeform.content.focus();
-	  return false;
-	}
-        
-	if(document.writeform.pw.value==""){
-	  alert(" 비밀번호를 입력하십시요.");
-	  document.writeform.pw.focus();
-	  return false;
-	}
-	//document.writeform.submit();
-	return true;
- }    
+if(document.getElementById("check").checked){
+	document.getElementById("non_check").disabled = ture;
+}//checkbox
 
+function writeCheck(){
+	
+	if($('#title').val()==''){
+		alert("제목을 입력하십시요.");
+		$('#title').focus();
+		return false;
+	}//#title
+	if($('#content').val()==""){
+		alert("내용을 입력하십시오.");
+		$('#content').focus();
+		return false;
+	}//#content
+	
+	return true;
+ }//inputCheck()
 
 function loginCheck(){
 	if(document.loginForm.id.value==''){
