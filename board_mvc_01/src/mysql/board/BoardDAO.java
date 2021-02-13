@@ -113,7 +113,7 @@ public class BoardDAO {
 			conn = getConn();
 			sql = "select * from board order by ref desc, re_step asc limit ?,?";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, start); //시작위치
+			pstmt.setInt(1, start-1); //시작위치
 			pstmt.setInt(2, cnt); //갯수
 			rs = pstmt.executeQuery();
 		
@@ -153,7 +153,7 @@ public class BoardDAO {
 		BoardDTO boardDTO = null;
 		try{
 			conn = getConn();
-			sql = "update board set readecount=readcount+1 where num=?";
+			sql = "update board set readcount=readcount+1 where num=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			pstmt.executeUpdate();
