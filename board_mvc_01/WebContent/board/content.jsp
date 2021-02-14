@@ -6,6 +6,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>board content</title>
 <link href="style.css" rel="stylesheet" type="text/css">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script type="text/javascript" src="script.js"></script>
 </head>
 <body>
 	<table border="1">
@@ -34,7 +36,7 @@
 	</table>
 	<div align="center">
 		<a href="${ctxpath}/board/updateForm.do?num=${num}&pageNum=${pageNum}">수정</a>&nbsp;
-		<a href="${ctxpath}/board/deleteForm.do?num=${num}&pageNum=${pageNum}">삭제</a>&nbsp;
+		<input type="button" value="삭제" onclick="del('${ctxpath}/board/delete.do?num=${num}&pageNum=${pageNum}')">
 		<a href="${ctxpath}/board/writeForm.do?num=${num}&pageNum=${pageNum}&ref=${ref}&re_step=${re_step}&re_level=${re_level}">답글</a>&nbsp;
 		<a href="${ctxpath}/board/list.do?pageNum=${pageNum}">목록</a>
 	</div>
