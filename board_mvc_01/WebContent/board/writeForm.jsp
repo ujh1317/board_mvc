@@ -10,6 +10,18 @@
 <script type="text/javascript" src="script.js"></script>
 </head>
 <body>
+	<c:if test="${empty sessionScope.memId}">
+		<table>
+			<tr>
+				<td><b>로그인 후 글을 작성해 주세요.</b></td>
+			</tr>
+			<tr>
+				<td>
+					<input type="button" value="로그인" onclick="location='${ctxpath}/member/main.do'">
+				</td>
+			</tr>
+		</table>
+	</c:if>
 	<table>
 		<tr>
 			<td colspan="2" align="center"><font size="7"><b>write</b></font></td>
