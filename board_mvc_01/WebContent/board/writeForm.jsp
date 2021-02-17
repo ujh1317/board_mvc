@@ -17,11 +17,13 @@
 			</tr>
 			<tr>
 				<td>
-					<input type="button" value="로그인" onclick="location='${ctxpath}/member/main.do'">
+					<input type="button" value="로그인" onclick="location='${ctxpath}/member/loginForm.do'">
+					<input type="button" value="회원가입" onclick="location='${ctxpath}/member/inputForm.do'">
 				</td>
 			</tr>
 		</table>
 	</c:if>
+	<c:if test="${!empty sessionScope.memId}">
 	<table>
 		<tr>
 			<td colspan="2" align="center"><font size="7"><b>write</b></font></td>
@@ -73,5 +75,6 @@
 			</tr>
 		</table>
 	</form>
+	</c:if>
 </body>
 </html>

@@ -13,7 +13,7 @@
 <body>
 	<table>
 		<tr>
-			<td colspan="2" align="center"><font size="7"><b>게시판</b></font></td>
+			<td colspan="2" align="center"><font size="7"><b>회원가입</b></font></td>
 		</tr>
 		<tr>
 			<td align="right">
