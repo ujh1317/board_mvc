@@ -16,7 +16,9 @@
 		</tr>
 		<tr>
 			<td align="right">
-				<a href="${ctxpath}/board/writeForm.do">글쓰기</a>
+				<c:if test="${!empty sessionScope.memId}">
+					<a href="${ctxpath}/board/writeForm.do">글쓰기</a>
+				</c:if>
 			</td>
 		</tr>
 	</table>
@@ -58,14 +60,24 @@
 						</c:if>
 					</c:if>
 					<c:if test="${dto.rank==0}">
-						<a href="${ctxpath}/board/content.do?num=${dto.num}&pageNum=${pageNum}">${dto.title}</a>
+						<c:if test="${empty sessionScope.memId}">
+							${dto.title}
+						</c:if>
+						<c:if test="${!empty sessionScope.memId}">
+							<a href="${ctxpath}/board/content.do?num=${dto.num}&pageNum=${pageNum}">${dto.title}</a>
+						</c:if>
 					</c:if>
 					<c:if test="${dto.readcount>20}">
 						<img src="../imgs/hot.gif" border="0" height="10"/>
 					</c:if>
 				</td>
 				<td align="center">
-					<a href="mailto:hong@naver.com">${dto.writer}</a>
+					<c:if test="${empty sessionScope.memId}">
+						${dto.writer}
+					</c:if>
+					<c:if test="${!empty sessionScope.memId}">
+						<a href="mailto:hong@naver.com">${dto.writer}</a>
+					</c:if>
 				</td>
 				<td>${dto.regdate}</td>
 				<td align="right">${dto.readcount}</td>
