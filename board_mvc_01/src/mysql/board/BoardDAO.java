@@ -261,13 +261,13 @@ public class BoardDAO {
 		int x = -10;
 		try{
 			conn = getConn();
-			pstmt = conn.prepareStatement("select * from board where num=?");
+			pstmt = conn.prepareStatement("select writer from board where num=?");
 			pstmt.setInt(1, num);
 			rs = pstmt.executeQuery();
 			if(rs.next()){
-				pstmt = conn.prepareStatement("delete * from board where num=?");
+				pstmt = conn.prepareStatement("delete from board where num=?");
 				pstmt.setInt(1, num);
-				pstmt.executeQuery();
+				pstmt.executeUpdate();
 				x = 1;
 			}else{
 				x = -1;

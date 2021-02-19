@@ -8,6 +8,11 @@
 <link href="style.css" rel="stylesheet" type="text/css">
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript" src="script.js"></script>
+<script>
+function del1(){
+	return confirm("삭제?");
+}
+</script>
 </head>
 <body>
 	<table border="1">
@@ -35,11 +40,12 @@
 		</tr>
 	</table>
 	<div align="center">
-		<a href="${ctxpath}/board/updateForm.do?num=${num}&pageNum=${pageNum}">수정</a>&nbsp;
-		<input type="button" value="삭제" onclick="del('${ctxpath}/board/delete.do?num=${num}&pageNum=${pageNum}')">
-		<a href="<c:url value='${ctxpath}/board/delete.do?num=${num}&pageNum=${pageNum}'/>" onclick="if(!confirm('삭제하시겠습니까?')){return false;}">삭제</a>
-		<a href="${ctxpath}/board/writeForm.do?num=${num}&pageNum=${pageNum}&ref=${ref}&re_step=${re_step}&re_level=${re_level}">답글</a>&nbsp;
-		<a href="${ctxpath}/board/list.do?pageNum=${pageNum}">목록</a>
+		<a href="${ctxpath}/board/list.do?pageNum=${pageNum}">목록</a>&nbsp;&nbsp;
+		<a href="${ctxpath}/board/writeForm.do?num=${num}&pageNum=${pageNum}&ref=${ref}&re_step=${re_step}&re_level=${re_level}">답글</a>&nbsp;&nbsp;
+		<c:if test="${sessionScope.memId eq writer or sessionScope.memId eq 'admin'}">
+			<a href="${ctxpath}/board/updateForm.do?num=${num}&pageNum=${pageNum}">수정</a>&nbsp;&nbsp;
+			<a href="${ctxpath}/board/delete.do?num=${num}&pageNum=${pageNum}" onclick="return confirm('정말 삭제하시겠습니까?');">삭제</a>&nbsp;&nbsp;
+		</c:if>
 	</div>
 </body>
 </html>
