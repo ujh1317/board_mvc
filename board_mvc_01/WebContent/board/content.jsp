@@ -37,6 +37,7 @@
 	<div align="center">
 		<a href="${ctxpath}/board/updateForm.do?num=${num}&pageNum=${pageNum}">수정</a>&nbsp;
 		<input type="button" value="삭제" onclick="del('${ctxpath}/board/delete.do?num=${num}&pageNum=${pageNum}')">
+		<a href="<c:url value='${ctxpath}/board/delete.do?num=${num}&pageNum=${pageNum}'/>" onclick="if(!confirm('삭제하시겠습니까?')){return false;}">삭제</a>
 		<a href="${ctxpath}/board/writeForm.do?num=${num}&pageNum=${pageNum}&ref=${ref}&re_step=${re_step}&re_level=${re_level}">답글</a>&nbsp;
 		<a href="${ctxpath}/board/list.do?pageNum=${pageNum}">목록</a>
 	</div>
