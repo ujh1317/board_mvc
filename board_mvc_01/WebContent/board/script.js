@@ -30,6 +30,4 @@ function loginCheck(){
 		return false;
 	}
 	return true;
-}
-
-}//del()
+}//loginCheck()

@@ -8,11 +8,6 @@
 <link href="style.css" rel="stylesheet" type="text/css">
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript" src="script.js"></script>
-<script>
-function del1(){
-	return confirm("삭제?");
-}
-</script>
 </head>
 <body>
 	<table border="1">
@@ -37,6 +32,8 @@ function del1(){
 			<td colspan="3">${content}</td>
 		</tr>
 		<tr>
+			<td>IP</td>
+			<td colspan="3">${boardDTO.ip}</td>
 		</tr>
 	</table>
 	<div align="center">
