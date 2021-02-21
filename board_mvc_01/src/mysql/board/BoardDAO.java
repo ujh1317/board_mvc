@@ -6,7 +6,6 @@ import javax.naming.*;
 
 public class BoardDAO {
 	Connection conn = null;
-	Statement stmt = null;
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
 	String sql = "";
