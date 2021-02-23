@@ -82,4 +82,25 @@ public class NoticeDAO {
 		}//finally
 	}//insertNotice()
 	
+	public int getCount() throws Exception{
+		int x = 0;
+		try{
+			conn = getConn();
+			pstmt = conn.prepareStatement("select count(*) from notice");
+			rs = pstmt.executeQuery();
+			if(rs.next()){
+				x = rs.getInt(1);
+			}//if
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			try{
+				if(rs!=null){rs.close();}
+				if(pstmt!=null){pstmt.close();}
+				if(conn!=null){conn.close();}
+			}catch(Exception e){}
+		}//finally
+		return x;
+	}//getCount()
+	
 }//class
