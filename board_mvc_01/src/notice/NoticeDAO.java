@@ -5,6 +5,8 @@ import java.sql.*;
 import javax.sql.*;
 import javax.naming.*;
 
+import mysql.board.BoardDTO;
+
 
 public class NoticeDAO {
 	Connection conn = null;
@@ -45,7 +47,7 @@ public class NoticeDAO {
 			}//else
 			
 			if(num!=0){
-				sql = "update notice set re_step = re_step+2 where ref=? and re_step>?";
+				sql = "update notice set re_step = re_step+1 where ref=? and re_step>?";
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setInt(1, ref);
 				pstmt.setInt(2, re_step);
@@ -102,5 +104,81 @@ public class NoticeDAO {
 		}//finally
 		return x;
 	}//getCount()
+	
+	public List getList(int start, int cnt) throws Exception{
+		List<BoardDTO> list = null;
+		try{
+			conn = getConn();
+			sql = "select * from notice order by ref desc, re_step asc limit ?,?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, start-1); //시작위치
+			pstmt.setInt(2, cnt); //갯수
+			rs = pstmt.executeQuery();
+		
+			if(rs.next()){
+				list = new ArrayList<BoardDTO>();
+				do{
+					BoardDTO boardDTO = new BoardDTO();
+					boardDTO.setNum(rs.getInt("num"));
+					boardDTO.setWriter(rs.getString("writer"));
+					boardDTO.setTitle(rs.getString("title"));
+					boardDTO.setContent(rs.getString("content"));
+					boardDTO.setRegdate(rs.getString("regdate"));
+					boardDTO.setReadcount(rs.getInt("readcount"));
+					boardDTO.setRef(rs.getInt("ref"));
+					boardDTO.setRe_step(rs.getInt("re_step"));
+					boardDTO.setRe_level(rs.getInt("re_level"));
+					boardDTO.setIp(rs.getString("ip"));
+					list.add(boardDTO);
+				}while(rs.next());
+			}//if
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			try{
+				if(rs!=null){rs.close();}
+				if(pstmt!=null){pstmt.close();}
+				if(conn!=null){conn.close();}
+			}catch(Exception e){}
+		}//finally
+		return list;
+	}//getList()
+	
+	public BoardDTO getContent(int num) throws Exception{
+		BoardDTO boardDTO = null;
+		try{
+			conn = getConn();
+			sql = "update notice set readcount=readcount+1 where num=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			pstmt.executeUpdate();
+			
+			pstmt = conn.prepareStatement("select * from notice where num=?");
+			pstmt.setInt(1, num);
+			rs = pstmt.executeQuery();
+			if(rs.next()){
+				boardDTO = new BoardDTO();
+				boardDTO.setNum(rs.getInt("num"));
+				boardDTO.setWriter(rs.getString("writer"));
+				boardDTO.setTitle(rs.getString("title"));
+				boardDTO.setContent(rs.getString("content"));
+				boardDTO.setRegdate(rs.getString("regdate"));
+				boardDTO.setRef(rs.getInt("ref"));
+				boardDTO.setRe_step(rs.getInt("re_step"));
+				boardDTO.setRe_level(rs.getInt("re_level"));
+				boardDTO.setReadcount(rs.getInt("readcount"));
+				boardDTO.setIp(rs.getString("ip"));
+			}//if
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			try{
+				if(rs!=null){rs.close();}
+				if(pstmt!=null){pstmt.close();}
+				if(conn!=null){conn.close();}
+			}catch(Exception e){}
+		}//finally
+		return boardDTO;
+	}//getContent()
 	
 }//class
