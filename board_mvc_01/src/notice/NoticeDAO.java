@@ -106,7 +106,7 @@ public class NoticeDAO {
 	}//getCount()
 	
 	public List getList(int start, int cnt) throws Exception{
-		List<BoardDTO> list = null;
+		List<NoticeDTO> list = null;
 		try{
 			conn = getConn();
 			sql = "select * from notice order by ref desc, re_step asc limit ?,?";
@@ -116,20 +116,20 @@ public class NoticeDAO {
 			rs = pstmt.executeQuery();
 		
 			if(rs.next()){
-				list = new ArrayList<BoardDTO>();
+				list = new ArrayList<NoticeDTO>();
 				do{
-					BoardDTO boardDTO = new BoardDTO();
-					boardDTO.setNum(rs.getInt("num"));
-					boardDTO.setWriter(rs.getString("writer"));
-					boardDTO.setTitle(rs.getString("title"));
-					boardDTO.setContent(rs.getString("content"));
-					boardDTO.setRegdate(rs.getString("regdate"));
-					boardDTO.setReadcount(rs.getInt("readcount"));
-					boardDTO.setRef(rs.getInt("ref"));
-					boardDTO.setRe_step(rs.getInt("re_step"));
-					boardDTO.setRe_level(rs.getInt("re_level"));
-					boardDTO.setIp(rs.getString("ip"));
-					list.add(boardDTO);
+					NoticeDTO noticeDTO = new NoticeDTO();
+					noticeDTO.setNum(rs.getInt("num"));
+					noticeDTO.setWriter(rs.getString("writer"));
+					noticeDTO.setTitle(rs.getString("title"));
+					noticeDTO.setContent(rs.getString("content"));
+					noticeDTO.setRegdate(rs.getString("regdate"));
+					noticeDTO.setReadcount(rs.getInt("readcount"));
+					noticeDTO.setRef(rs.getInt("ref"));
+					noticeDTO.setRe_step(rs.getInt("re_step"));
+					noticeDTO.setRe_level(rs.getInt("re_level"));
+					noticeDTO.setIp(rs.getString("ip"));
+					list.add(noticeDTO);
 				}while(rs.next());
 			}//if
 		}catch(Exception e){
@@ -144,8 +144,8 @@ public class NoticeDAO {
 		return list;
 	}//getList()
 	
-	public BoardDTO getContent(int num) throws Exception{
-		BoardDTO boardDTO = null;
+	public NoticeDTO getContent(int num) throws Exception{
+		NoticeDTO noticeDTO = null;
 		try{
 			conn = getConn();
 			sql = "update notice set readcount=readcount+1 where num=?";
@@ -157,17 +157,17 @@ public class NoticeDAO {
 			pstmt.setInt(1, num);
 			rs = pstmt.executeQuery();
 			if(rs.next()){
-				boardDTO = new BoardDTO();
-				boardDTO.setNum(rs.getInt("num"));
-				boardDTO.setWriter(rs.getString("writer"));
-				boardDTO.setTitle(rs.getString("title"));
-				boardDTO.setContent(rs.getString("content"));
-				boardDTO.setRegdate(rs.getString("regdate"));
-				boardDTO.setRef(rs.getInt("ref"));
-				boardDTO.setRe_step(rs.getInt("re_step"));
-				boardDTO.setRe_level(rs.getInt("re_level"));
-				boardDTO.setReadcount(rs.getInt("readcount"));
-				boardDTO.setIp(rs.getString("ip"));
+				noticeDTO = new NoticeDTO();
+				noticeDTO.setNum(rs.getInt("num"));
+				noticeDTO.setWriter(rs.getString("writer"));
+				noticeDTO.setTitle(rs.getString("title"));
+				noticeDTO.setContent(rs.getString("content"));
+				noticeDTO.setRegdate(rs.getString("regdate"));
+				noticeDTO.setRef(rs.getInt("ref"));
+				noticeDTO.setRe_step(rs.getInt("re_step"));
+				noticeDTO.setRe_level(rs.getInt("re_level"));
+				noticeDTO.setReadcount(rs.getInt("readcount"));
+				noticeDTO.setIp(rs.getString("ip"));
 			}//if
 		}catch(Exception e){
 			e.printStackTrace();
@@ -178,7 +178,70 @@ public class NoticeDAO {
 				if(conn!=null){conn.close();}
 			}catch(Exception e){}
 		}//finally
-		return boardDTO;
+		return noticeDTO;
 	}//getContent()
+	
+	public NoticeDTO getUpdate(int num) throws Exception{
+		NoticeDTO noticeDTO = null;
+		try{
+			conn = getConn();
+			pstmt = conn.prepareStatement("select * from notice where num=?");
+			pstmt.setInt(1, num);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				noticeDTO = new NoticeDTO();
+				noticeDTO.setNum(rs.getInt("num"));
+				noticeDTO.setWriter(rs.getString("writer"));
+				noticeDTO.setTitle(rs.getString("title"));
+				noticeDTO.setContent(rs.getString("content"));
+				noticeDTO.setReadcount(rs.getInt("readcount"));
+				noticeDTO.setRegdate(rs.getString("regdate"));
+				noticeDTO.setRef(rs.getInt("ref"));
+				noticeDTO.setRe_step(rs.getInt("re_step"));
+				noticeDTO.setRe_level(rs.getInt("re_level"));
+				noticeDTO.setIp(rs.getString("ip"));
+			}//while
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			try{
+				if(rs!=null){rs.close();}
+				if(pstmt!=null){pstmt.close();}
+				if(conn!=null){conn.close();}
+			}catch(Exception e){}
+		}//finally
+		return noticeDTO;
+	}//getUpdate()
+	
+	public int getUpdateDb(NoticeDTO noticeDTO) throws Exception{
+		int x = -10;
+		try{
+			conn = getConn();
+			pstmt = conn.prepareStatement("select * from notice where num=?");
+			pstmt.setInt(1, noticeDTO.getNum());
+			rs = pstmt.executeQuery();
+			if(rs.next()){
+				sql = "update notice set title=?, content=? where num=?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, noticeDTO.getTitle());
+				pstmt.setString(2, noticeDTO.getContent());
+				pstmt.setInt(3, noticeDTO.getNum());
+				pstmt.executeUpdate();
+				x = 1;
+			}else{
+				x = -1;
+			}//else
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			try{
+				if(rs!=null){rs.close();}
+				if(pstmt!=null){rs.close();}
+				if(conn!=null){conn.close();}
+			}catch(Exception e){}
+		}//finally
+		return x;
+	}//getUpdateDb()
 	
 }//class
