@@ -244,4 +244,31 @@ public class NoticeDAO {
 		return x;
 	}//getUpdateDb()
 	
+	public int getDelete(int num) throws Exception{
+		int x = -10;
+		try{
+			conn = getConn();
+			pstmt = conn.prepareStatement("select writer from notice where num=?");
+			pstmt.setInt(1, num);
+			rs = pstmt.executeQuery();
+			if(rs.next()){
+				pstmt = conn.prepareStatement("delete from notice where num=?");
+				pstmt.setInt(1, num);
+				pstmt.executeUpdate();
+				x = 1;
+			}else{
+				x = -1;
+			}//else
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			try{
+				if(rs!=null){rs.close();}
+				if(pstmt!=null){pstmt.close();}
+				if(conn!=null){conn.close();}
+			}catch(Exception e){}
+		}//finally
+		return x;
+	}//getDelete()
+	
 }//class
