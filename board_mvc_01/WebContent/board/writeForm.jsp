@@ -34,7 +34,7 @@
 			</td>
 		</tr>
 	</table>
-	<form name="writeform" method="post" action="${ctxpath}/board/writePro.do" onsubmit="">
+	<form name="writeform" method="post" action="${ctxpath}/board/writePro.do" onsubmit="return writeCheck()">
 		<input type="hidden" name="num" value="${num}">
 		<input type="hidden" name="ref" value="${ref}">
 		<input type="hidden" name="re_step" value="${re_step}">

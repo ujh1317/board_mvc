@@ -1,0 +1,14 @@
+table{
+	width: 80%;
+	margin: auto;
+	min-width:600;
+	}
+a:link,a:visited,a:active,a:hover{
+	text-decoration: none;
+}
+table,tr,td,th{
+	font-size: 11pt;
+}
+p{
+	font-size: 11pt;
+}
